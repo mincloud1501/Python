@@ -10,4 +10,4 @@ These implementations are for learning purposes. They may be less efficient than
 
 ## Category
 
-See our [directory](DIRECTORY.md).
+See the [Category](DIRECTORY.md).
