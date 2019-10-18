@@ -9,7 +9,7 @@ Use PyCharm Community Edition.
 
 ## Time Series Analytics with Pandas (On Windows)
 
-### Prerequisites for running with `Conda` install
+### ■ Prerequisites for running with `Anaconda3` install
 
 - `python` version 3
 - `pandas` version or later
@@ -32,7 +32,7 @@ Solving environment: done
 
 ## Package Plan ##
 
-  environment location: C:\Users\SKbroadband\Anaconda3
+  environment location: C:\Users\mincloud\Anaconda3
 
   added / updated specs:
     - jupyter
@@ -43,8 +43,8 @@ Solving environment: done
 
 The following packages will be downloaded:
 
-    package                    |            build
-    ---------------------------|-----------------
+    		package            |     		build
+    ---------------------------|--------------------------------
     ca-certificates-2018.03.07 |                0         155 KB
     certifi-2018.4.16          |           py36_0         143 KB
     conda-4.6.14               |           py36_0         2.1 MB
@@ -54,18 +54,18 @@ The following packages will be downloaded:
 
 The following packages will be SUPERSEDED by a higher-priority channel:
 
-  ca-certificates                                  anaconda --> pkgs/main
-  certifi                                          anaconda --> pkgs/main
-  conda                                            anaconda --> pkgs/main
-  openssl                                          anaconda --> pkgs/main
+  ca-certificates                                anaconda --> pkgs/main
+  certifi                                        anaconda --> pkgs/main
+  conda                                          anaconda --> pkgs/main
+  openssl                                        anaconda --> pkgs/main
 ```
 
-### Setup & Run
+### ■ Setup & Run
 
 ```
 git clone https://github.com/mincloud1501/Python.git
 ```
-- After that, install the environment for this hands-on by running:
+- Install the environment for this hands-on by running:
 ```
 cd Python/
 conda activate mincloud
