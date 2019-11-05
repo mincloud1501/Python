@@ -2,10 +2,16 @@
 [![Gitter chat](https://img.shields.io/badge/Chat-Gitter-ff69b4.svg?label=Chat&logo=gitter&style=flat-square)](https://gitter.im/Python_Project/community)&nbsp;
 ![](https://img.shields.io/github/repo-size/mincloud1501/Python.svg?label=Repo%20size&style=flat-square)&nbsp;
 
-### All Codes implemented in Python (for Study)
+### All Codes implemented in Python (with Jupyter Notebook)
 
 These implementations are for learning purposes. They may be less efficient than the implementations in the Python standard library.
-Use PyCharm Community Edition.
+Use Jupyter Notebook & PyCharm Community Edition.
+
+#### ■ Python Data Analytic Library
+
+- [![Sources](https://img.shields.io/badge/출처-NumPy-yellow)](http://matplotlib.org) : 벡터 및 행렬 계산에 편의를 제공하는 라이브러리로 pandas,matplotlib의 기본 base library
+- `pandas` : 고유하게 정의된 자료 구조를 활용해서 빅데이터를 분석 가능, 기존 Excel로 가능했던 모든 분석을 scale과 속도 개선
+- [![Sources](https://img.shields.io/badge/출처-matplotlib-yellow)](http://matplotlib.org) : numpy와 pasndas를 통해 얻은 데이터 분석결과를 시각화 해주는 라이브러리
 
 ## Time Series Analytics with Pandas (On Windows)
 
@@ -43,7 +49,7 @@ Solving environment: done
 
 The following packages will be downloaded:
 
-    		package            |     		build
+    		package            |   		build
     ---------------------------|--------------------------------
     ca-certificates-2018.03.07 |                0         155 KB
     certifi-2018.4.16          |           py36_0         143 KB
@@ -63,17 +69,29 @@ The following packages will be SUPERSEDED by a higher-priority channel:
 ### ■ Setup & Run
 
 ```
-git clone https://github.com/mincloud1501/Python.git
+> git clone https://github.com/mincloud1501/Python.git
 ```
 - Install the environment for this hands-on by running:
 ```
-cd Python/
-conda activate mincloud
-python -m ipykernel install --name mincloud --user
-jupyter notebook --port=8888
+> cd Python/
+> conda activate mincloud
+> python -m ipykernel install --name mincloud --user
+> jupyter notebook --port=8888
 ```
 
-## Community Channel
+## USEFUL SHORTCUTS (Jupyter Notebook)
+```js
+run_and_pass = 'Shift + Enter'
+run_and_add_cell = 'Alt + Enter'
+run_and_stay = 'Ctrl + Enter'
+
+recommendations = 'Tab'
+docstrings = 'Shift + Tab'
+
+add_hashtag = 'Ctrl + /'
+add_cell = 'b'
+delete_cell = 'dd'
+```
 
 ## Category
 
