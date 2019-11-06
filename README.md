@@ -9,8 +9,8 @@ Use Jupyter Notebook & PyCharm Community Edition.
 
 #### ■ Python Data Analytic Library
 
-- [![Sources](https://img.shields.io/badge/출처-NumPy-yellow)](http://matplotlib.org) : 벡터 및 행렬 계산에 편의를 제공하는 라이브러리로 pandas,matplotlib의 기본 base library
-- `pandas` : 고유하게 정의된 자료 구조를 활용해서 빅데이터를 분석 가능, 기존 Excel로 가능했던 모든 분석을 scale과 속도 개선
+- [![Sources](https://img.shields.io/badge/출처-NumPy-yellow)](https://numpy.org) : 벡터 및 행렬 계산에 편의를 제공하는 라이브러리로 pandas,matplotlib의 기본 base library
+- [![Sources](https://img.shields.io/badge/출처-Pandas-yellow)](https://pandas.pydata.org/) : 고유하게 정의된 자료 구조를 활용해서 빅데이터 분석 가능
 - [![Sources](https://img.shields.io/badge/출처-matplotlib-yellow)](http://matplotlib.org) : numpy와 pasndas를 통해 얻은 데이터 분석결과를 시각화 해주는 라이브러리
 
 ## Time Series Analytics with Pandas (On Windows)
@@ -26,6 +26,11 @@ Use Jupyter Notebook & PyCharm Community Edition.
 - `scikit-learn` 0.20.2 or later
 - `jupyter` version 1.0.0 or later
 - `statsmodels` version 0.9.0 or later
+
+- `konlpy` version 0.5.1 or later
+- `JPype1` version 0.7.0 or later
+- `pytagcloud` version 0.3.5 or later
+- `simplejson` version 3.16.0 or later
 
 ```
 conda create --name mincloud python=3
@@ -92,6 +97,19 @@ add_hashtag = 'Ctrl + /'
 add_cell = 'b'
 delete_cell = 'dd'
 ```
+
+### ■ Prerequisites for collecting `Facebook` data [![Sources](https://img.shields.io/badge/참고-Facebook-yellow)](https://developers.facebook.com/docs/graph-api)
+
+- 페이스북 (http://www.facebook.com) 가입
+- 페이스북 개발자 페이지(http://developer.facebook.com) 계정 생성
+- Facebook API 사용등록 및 신규 app 생성
+- 대시보드에서 `App ID`와 `Secret Code` 확인
+
+### ■ Prerequisites for collecting `Naver` data [![Sources](https://img.shields.io/badge/참고-Naver-yellow)](https://developers.naver.com/docs/search/news/)
+
+- 네이버 개발자 페이지(https://developers.naver.com) 에서 오픈API 이용 신청에서 검색 API 추가
+- 웹 서비스 URL (http://localhost) 등록
+- `Client ID`와 `Client Secret` 확인
 
 ## Category
 
