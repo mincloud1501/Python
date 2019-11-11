@@ -10,8 +10,9 @@ Use Jupyter Notebook & PyCharm Community Edition.
 #### ■ Python Data Analytic Library
 
 - [![Sources](https://img.shields.io/badge/출처-NumPy-yellow)](https://numpy.org) : 벡터 및 행렬 계산에 편의를 제공하는 라이브러리로 pandas,matplotlib의 기본 base library
-- [![Sources](https://img.shields.io/badge/출처-Pandas-yellow)](https://pandas.pydata.org/) : 고유하게 정의된 자료 구조를 활용해서 빅데이터 분석 가능
+- [![Sources](https://img.shields.io/badge/출처-pandas-yellow)](https://pandas.pydata.org/) : 고유하게 정의된 자료 구조를 활용해서 빅데이터 분석 가능
 - [![Sources](https://img.shields.io/badge/출처-matplotlib-yellow)](http://matplotlib.org) : numpy와 pasndas를 통해 얻은 데이터 분석결과를 시각화 해주는 라이브러리
+- [![Sources](https://img.shields.io/badge/출처-seaborn-yellow)](https://seaborn.pydata.org/index.html) : matplotlib을 기반으로 하는 Python데이터 시각화 라이브러리로 매력적이고 정보를 제공하는 통계 그래픽을 그리기 위한 높은 수준의 인터페이스를 제공
 
 ## Time Series Analytics with Pandas (On Windows)
 
@@ -110,6 +111,12 @@ delete_cell = 'dd'
 - 네이버 개발자 페이지(https://developers.naver.com) 에서 오픈API 이용 신청에서 검색 API 추가
 - 웹 서비스 URL (http://localhost) 등록
 - `Client ID`와 `Client Secret` 확인
+
+### ■ `D3.js` Reference for Data Visualizations
+
+- [![Sources](https://img.shields.io/badge/참고-d3js-yellow)](https://d3js.org/)
+- [![Sources](https://img.shields.io/badge/참고-Mike_Bostock’s_Blocks-yellow)](https://bl.ocks.org/mbostock)
+- [![Sources](https://img.shields.io/badge/참고-Mike_Bostock-yellow)](https://bost.ocks.org/mike/)
 
 ## Category
 
