@@ -5,6 +5,8 @@ import datetime
 import time
 import json
 
+client_id = "dQOqapCr9Oi_rnjiZsMv"
+client_secret = "ucnvwibcE_"
 
 # blog 검색
 # url = "https://openapi.naver.com/v1/search/blog?query=" + encText # json 결과
@@ -57,9 +59,12 @@ def getPostData(post, jsonResult):
     pDate = datetime.datetime.strptime(post['pubDate'], '%a, %d %b %Y %H:%M:%S +0900')
     pDate = pDate.strftime('%Y-%m-%d %H:%M:%S')
 
-    jsonResult.append({'title': title, 'description': description,
-                       'org_link': org_link, 'link': org_link,
-                       'pDate': pDate})
+    #jsonResult.append({'title': title, 'description': description,
+    #                   'org_link': org_link, 'link': org_link,
+    #                   'pDate': pDate})
+
+    jsonResult.append({'description': description})
+    
     return
 
 
