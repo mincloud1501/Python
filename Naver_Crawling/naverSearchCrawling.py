@@ -5,9 +5,6 @@ import datetime
 import time
 import json
 
-client_id = "dQOqapCr9Oi_rnjiZsMv"
-client_secret = "ucnvwibcE_"
-
 # blog 검색
 # url = "https://openapi.naver.com/v1/search/blog?query=" + encText # json 결과
 # url = "https://openapi.naver.com/v1/search/blog.xml?query=" + encText # xml 결과
