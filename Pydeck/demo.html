@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>pydeck</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js'></script>
+<link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />    <style>
+    body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#deck-map-container {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+#map {
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+#deckgl-overlay {
+  z-index: 2;
+}
+
+#deck-map-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#deck-container {
+  width: 100vw;
+  height: 100vh;
+}    </style>
+  </head>
+  <body>
+    <div id="deck-container">
+    </div>
+  </body>
+  <script>
+  const DEPENDENCIES = {
+  "map": {
+    "*": {
+      "@deck.gl/jupyter-widget": "nbextensions/pydeck/index"
+    }
+  },
+  "paths": {
+    "deck.gl": "https://unpkg.com/deck.gl@~7.3.0-beta.8/dist.min",
+    "mapbox-gl": "https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl",
+    "h3": "https://unpkg.com/h3-js@^3.4.3/dist/h3-js.umd",
+    "s2Geometry": "https://bundle.run/s2-geometry@1.2.10?name=index",
+    "loaders.gl/csv": "https://unpkg.com/@loaders.gl/csv@1.2.2/dist/dist.min",
+    "nbextensions/pydeck": "https://unpkg.com/@deck.gl/jupyter-widget@~7.3.0-beta.8/dist"
+  }
+};
+const jsonInput = {"initialViewState": {"bearing": -27.36, "latitude": 52.2323, "longitude": -1.415, "maxZoom": 15, "minZoom": 5, "pitch": 40.5, "zoom": 6}, "layers": [{"autoHighlight": true, "coverage": 1, "data": "https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/3d-heatmap/heatmap-data.csv", "elevationRange": [0, 3000], "elevationScale": 50, "extruded": true, "getPosition": "[lng, lat]", "id": "e45b056c-91e4-47aa-a1b9-a3f893b9f06a", "pickable": true, "type": "HexagonLayer"}], "mapStyle": "mapbox://styles/mapbox/dark-v9", "views": [{"controller": true, "type": "MapView"}]};
+const MAPBOX_API_KEY = 'pk.eyJ1IjoibWluY2xvdWQiLCJhIjoiY2szczB5OW9pMDI2MzNkbXhmNzYzZHdzdSJ9.8Rqgp0euhZlLXHqzl4niRg';
+const tooltip = true;
+
+define('@jupyter-widgets/base', function() {
+  return {
+    DOMWidgetModel: function() {},
+    DOMWidgetView: function() {}
+  };
+});
+
+requirejs.config(DEPENDENCIES);
+
+requirejs(['@deck.gl/jupyter-widget'], (root) => {
+  const deck = root.initDeck({
+    mapboxApiKey: MAPBOX_API_KEY, 
+    container: document.getElementById('deck-container'),
+    jsonInput,
+    tooltip
+  });
+})  </script>
+</html>

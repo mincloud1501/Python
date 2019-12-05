@@ -38,7 +38,7 @@ conda create --name mincloud python=3
 conda install pandas jupyter seaborn scikit-learn statsmodels
 conda info --envs
 ```
-```js
+```bash
 Collecting package metadata: done
 Solving environment: done
 
@@ -55,7 +55,7 @@ Solving environment: done
 
 The following packages will be downloaded:
 
-    		package            |   		build
+    		package                |   		 build
     ---------------------------|--------------------------------
     ca-certificates-2018.03.07 |                0         155 KB
     certifi-2018.4.16          |           py36_0         143 KB
@@ -117,6 +117,70 @@ delete_cell = 'dd'
 - [![Sources](https://img.shields.io/badge/참고-d3js-yellow)](https://d3js.org/)
 - [![Sources](https://img.shields.io/badge/참고-Mike_Bostock’s_Blocks-yellow)](https://bl.ocks.org/mbostock)
 - [![Sources](https://img.shields.io/badge/참고-Mike_Bostock-yellow)](https://bost.ocks.org/mike/)
+
+### ■ `Pydeck` 
+
+- Pydeck library is a set of Python bindings for making spatial visualizations with deck.gl, optimized for a Jupyter Notebook environment.
+
+#### Installation
+
+```bash
+$pip install pydeck
+```
+- Jupyter notebook server에 설치하면, widget extension을 사용할 수 있다.
+
+```bash
+$jupyter nbextension install --sys-prefix --symlink --overwrite --py pydeck
+$jupyter nbextension enable --sys-prefix --py pydeck
+```
+
+#### Mapbox API token
+
+- [![Sources](https://img.shields.io/badge/참고-Mapbox-yellow)](http://mapbox.com/) 에 계정 생성
+- Access Token Copy
+- Mapbox basemaps 사용을 위한 환경변수 설정 `export MAPBOX_API_KEY=<mapbox-key-here>`
+
+![mapbox](images/mapbox_access_token.png)
+
+
+#### Getting started
+
+```js
+import pydeck as pdk
+
+# 2014 locations of car accidents in the UK
+UK_ACCIDENTS_DATA = ('https://raw.githubusercontent.com/uber-common/'
+                     'deck.gl-data/master/examples/3d-heatmap/heatmap-data.csv')
+
+# Define a layer to display on a map
+layer = pdk.Layer(
+    'HexagonLayer',
+    UK_ACCIDENTS_DATA,
+    get_position='[lng, lat]',
+    auto_highlight=True,
+    elevation_scale=50,
+    pickable=True,
+    elevation_range=[0, 3000],
+    extruded=True,                 
+    coverage=1)
+
+# Set the viewport location
+view_state = pdk.ViewState(
+    longitude=-1.415,
+    latitude=52.2323,
+    zoom=6,
+    min_zoom=5,
+    max_zoom=15,
+    pitch=40.5,
+    bearing=-27.36)
+
+# Render
+r = pdk.Deck(layers=[layer], initial_view_state=view_state)
+r.to_html('demo.html')
+
+# Jupyter 환경 밖에서 실행 시
+r.to_html('demo.html', notebook_display=False)
+```
 
 ## Category
 
