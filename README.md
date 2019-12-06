@@ -205,6 +205,8 @@ pdk.Deck(
 )
 ```
 
+---
+
 #### Mapbox API token
 
 - [![Sources](https://img.shields.io/badge/참고-Mapbox-yellow)](http://mapbox.com/) 에 계정 생성
@@ -214,7 +216,7 @@ pdk.Deck(
 ![mapbox](images/mapbox_access_token.png)
 
 
-#### Getting started
+#### Getting started (Demo.ipynb)
 
 ```js
 import pydeck as pdk
@@ -262,9 +264,11 @@ def multipolygon_to_coordinates(x):
 
 df['coordinates'] = df['geometry'].apply(multipolygon_to_coordinates)
 del df['geometry']
-````
+```
 
-- pydeck 을 이용하여 각 데이터를 Choropleth로 시각화 할 수 있다. pydeck에서는 Choropleth로 부르지 않고 PolygonLayer라고 한다.
+- pydeck 을 이용하여 각 데이터를 Choropleth로 시각화 할 수 있다. pydeck에서는 Choropleth로 부르지 않고 PolygonLayer라고 한다. (sample_older_seoul.ipynb)
+
+![PolygonLayer](images/PolygonLayer.png)
 
 ```js
 // Make layer
@@ -289,6 +293,30 @@ view_state = pdk.ViewState(
 r = pdk.Deck(layers=[layer], initial_view_state=view_state)
 r.show()
 ```
+
+- HeatmapLayer를 이용하여 Point들의 밀집도를 한 눈에 파악 가능하다. (sample_toilet_seoul.ipynb)
+
+![HeatmapLayer](images/HeatmapLayer.png)
+
+```js
+layer = pdk.Layer(
+    'HeatmapLayer',
+    df,
+    get_position='[lng, lat]'
+)
+
+center = [126.986, 37.565]
+view_state = pdk.ViewState(
+    longitude=center[0],
+    latitude=center[1],
+    zoom=10
+)
+
+r = pdk.Deck(layers=[layer], initial_view_state=view_state)
+r.show()
+```
+
+
 
 ## Category
 
