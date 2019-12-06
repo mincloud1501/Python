@@ -118,6 +118,32 @@ delete_cell = 'dd'
 - [![Sources](https://img.shields.io/badge/참고-Mike_Bostock’s_Blocks-yellow)](https://bl.ocks.org/mbostock)
 - [![Sources](https://img.shields.io/badge/참고-Mike_Bostock-yellow)](https://bost.ocks.org/mike/)
 
+---
+
+### ■ `deck.gl` 
+
+- deck.gl offers an extensive catalog of pre-packaged visualization "layers", including ScatterplotLayer, ArcLayer, TextLayer, GeoJsonLayer, etc.
+- Uber 에서 만든 자바스크립트 공간 데이터 시각화 라이브러리며, pydeck 은 이 라이브러리를 파이썬에서도 쓸 수 있도록 만든 패키지
+- 대용량 데이터도 거뜬하게 렌더링할 수 있으며, 렌더링이 좀 버거울 수도 있는 일부 레이어는 GPU 연산을 제공한다.
+
+#### Installation
+
+```bash
+$npm install deck.gl
+```
+
+- 다른 채널에서 다른 geo package를 설치하면 종속성 충돌이 발생할 수 있으므로, 새로운 환경에서 geopandas 설치 권고
+
+```bash
+$conda create -n geo_env
+$conda activate geo_env
+$conda config --env --add channels conda-forge
+$conda config --env --set channel_priority strict
+$conda install python=3 geopandas
+```
+
+---
+
 ### ■ `Pydeck` 
 
 - Pydeck library is a set of Python bindings for making spatial visualizations with deck.gl, optimized for a Jupyter Notebook environment.
@@ -134,11 +160,56 @@ $jupyter nbextension install --sys-prefix --symlink --overwrite --py pydeck
 $jupyter nbextension enable --sys-prefix --py pydeck
 ```
 
+##### `pdk.Layer`
+
+- 레이어를 지도 위에 올릴 때, 항상 이 클래스를 통해서 만든다.
+
+```js
+pdk.Layer
+  type = "미리 정의된 레이어 타입",
+  id = "이 레이어의 아이디 (optional)",
+  data = "pandas.DataFrame 또는 geojson url",
+)
+```
+
+##### `pdk.ViewState`
+
+- folium이나 mapboxgl에서도 흔히 볼 수 있는 파라미터들로 렌더링 시, 초기화 뷰에 대한 설정이다.
+
+```js
+pdk.ViewState(
+  longitude = "중심 경도 (default 0)",
+  latitude = "중심 위도 (default 0)",
+  zoom = "줌 레벨 (default 0)",
+  pitch = (default 0),
+  bearing = (default 0),
+  **kwargs,
+)
+```
+
+##### `pdk.Deck`
+
+- 생성된 Layer, View Info, Map Style 등 모든 요소를 모아 출력시킬 수 있는 클래스
+- mapboxgl 과 비교되는 가장 큰 장점으로 Layer를 쌓을 땐, layers 리스트에 추가하면 된다.
+
+```js
+pdk.Deck(
+  layers=[],
+  views=[{"controller": true, "type": "MapView"}],
+  map_style='mapbox://styles/mapbox/dark-v9',
+  mapbox_key=None,
+  initial_view_state={"bearing": 0, "latitude": 0.0, "longitude": 0.0, "maxZoom": 20, "minZoom": 0, "pitch": 0, "zoom": 1},
+  width='100%',
+  height=500,
+  tooltip=True,
+)
+```
+
 #### Mapbox API token
 
 - [![Sources](https://img.shields.io/badge/참고-Mapbox-yellow)](http://mapbox.com/) 에 계정 생성
 - Access Token Copy
-- Mapbox basemaps 사용을 위한 환경변수 설정 `export MAPBOX_API_KEY=<mapbox-key-here>`
+- Mapbox basemaps 사용을 위한 환경변수 설정 `MAPBOX_API_KEY=<mapbox-key-here>`
 
 ![mapbox](images/mapbox_access_token.png)
 
@@ -180,6 +251,43 @@ r.to_html('demo.html')
 
 # Jupyter 환경 밖에서 실행 시
 r.to_html('demo.html', notebook_display=False)
+```
+
+- pydeck은 `shapely.geometry.multipolygon` 형태를 읽지 못하므로 항상 geometry에 연속된 포인트들을 갖는 리스트 값이 있어야 한다.
+
+```js
+def multipolygon_to_coordinates(x):
+  lon, lat = x[0].exterior.xy
+  return [[x, y] for x, y in zip(lon, lat)]
+
+df['coordinates'] = df['geometry'].apply(multipolygon_to_coordinates)
+del df['geometry']
+````
+
+- pydeck 을 이용하여 각 데이터를 Choropleth로 시각화 할 수 있다. pydeck에서는 Choropleth로 부르지 않고 PolygonLayer라고 한다.
+
+```js
+// Make layer
+layer = pdk.Layer(
+    'PolygonLayer', // 사용할 Layer 타입
+    df,             // 시각화에 쓰일 데이터프레임
+    get_polygon='coordinates', // geometry 정보를 담고있는 컬럼 이름
+    get_fill_color='[0, 255*정규화인구, 0]', // 각 데이터 별 rgb 또는 rgba 값 (0~255)
+    pickable=True, // 지도와 interactive 한 동작 on
+    auto_highlight=True // 마우스 오버(hover) 시 박스 출력
+)
+
+// Set the viewport location
+center = [126.986, 37.565]
+view_state = pdk.ViewState(
+    longitude=center[0],
+    latitude=center[1],
+    zoom=10
+)
+
+// Render
+r = pdk.Deck(layers=[layer], initial_view_state=view_state)
+r.show()
 ```
 
 ## Category
