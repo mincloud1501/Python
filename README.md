@@ -316,6 +316,119 @@ r = pdk.Deck(layers=[layer], initial_view_state=view_state)
 r.show()
 ```
 
+---
+
+# Python용 GCP Stackdriver Trace 설정
+
+- 추적을 수집하려면 Stackdriver 내보내기와 OpenCensus 추적기 패키지를 가져와야 한다. 또한 애플리케이션은 Stackdriver 내보내기와 추적기를 인스턴스화해야 한다.
+- Stackdriver 내보내기는 애플리케이션 기본 사용자 인증 정보를 통해 인증되며, 코드를 GCP(Google Cloud Platform)에서 실행한다면 프로젝트 ID는 생략해도 된다.
+- `GOOGLE_APPLICATION_CREDENTAILS` 환경 변수에 Service account 파일의 경로를 지정하고 google cloud의 어느 project에 있는 Stack Driver와 연결할지를 `PROJECT_ID` 환경 변수에 Project명을 지정해주면 된다.
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="c:/zipkin-proxy-dc1792cd9893.json"
+export PROJECT_ID="zipkin-proxy"
+```
+
+```bash
+> pip install google-api-python-client
+```
+
+- Create the exporters in code
+- Run the code: `python main.py`
+- Running on http://127.0.0.1:5000/
+- Viewing your traces: `https://console.cloud.google.com/traces/traces`
+
+[main.py]
+```python
+import argparse
+import random
+import time
+
+from flask import Flask, redirect, url_for
+
+# [START trace_setup_python_configure]
+from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
+import opencensus.trace.tracer
+
+
+def initialize_tracer(project_id):
+    exporter = stackdriver_exporter.StackdriverExporter(
+        project_id=project_id
+    )
+    tracer = opencensus.trace.tracer.Tracer(
+        exporter=exporter,
+        sampler=opencensus.trace.tracer.samplers.AlwaysOnSampler()
+    )
+
+    return tracer
+# [END trace_setup_python_configure]
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def root():
+    return redirect(url_for('index'))
+
+
+# [START trace_setup_python_quickstart]
+@app.route('/index.html', methods=['GET'])
+def index():
+    tracer = app.config['TRACER']
+    tracer.start_span(name='index')
+
+    # Add up to 1 sec delay, weighted toward zero
+    time.sleep(random.random() ** 2)
+    result = "Tracing requests"
+
+    tracer.end_span()
+    return result
+# [END trace_setup_python_quickstart]
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        '--project_id', help='Project ID you want to access.', required=True)
+    args = parser.parse_args()
+
+    tracer = initialize_tracer(args.project_id)
+    app.config['TRACER'] = tracer
+
+    app.run()
+```
+
+[main_test.py]
+
+```python
+import os
+import main
+
+def test_index():
+    project_id = os.environ['GCLOUD_PROJECT']
+    main.app.testing = True
+    main.app.config['TRACER'] = main.initialize_tracer(project_id)
+    client = main.app.test_client()
+
+    resp = client.get('/index.html')
+    assert resp.status_code == 200
+    assert 'Tracing requests' in resp.data.decode('utf-8')
+
+def test_redirect():
+    project_id = os.environ['GCLOUD_PROJECT']
+    main.app.testing = True
+    main.app.config['TRACER'] = main.initialize_tracer(project_id)
+    client = main.app.test_client()
+
+    resp = client.get('/')
+    assert resp.status_code == 302
+    assert '/index.html' in resp.headers.get('location', '')
+```
+
+[Trace Result]
+![StackDriver](images/stackdriver_result.png)
 
 
 ## Category
