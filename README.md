@@ -318,14 +318,13 @@ r.show()
 
 ---
 
-# Python용 GCP Stackdriver Trace 설정
+# Python용 GCP Stackdriver Trace 설정 [![Sources](https://img.shields.io/badge/참고-Stackdriver-yellow)](https://cloud.google.com/trace/docs/setup/python?hl=ko)
 
 - 추적을 수집하려면 Stackdriver 내보내기와 OpenCensus 추적기 패키지를 가져와야 한다. 또한 애플리케이션은 Stackdriver 내보내기와 추적기를 인스턴스화해야 한다.
 - Stackdriver 내보내기는 애플리케이션 기본 사용자 인증 정보를 통해 인증되며, 코드를 GCP(Google Cloud Platform)에서 실행한다면 프로젝트 ID는 생략해도 된다.
-- `GOOGLE_APPLICATION_CREDENTAILS` 환경 변수에 Service account 파일의 경로를 지정하고 google cloud의 어느 project에 있는 Stack Driver와 연결할지를 `PROJECT_ID` 환경 변수에 Project명을 지정해주면 된다.
+- google cloud의 어느 project에 있는 Stack Driver와 연결할지를 `PROJECT_ID` 환경 변수에 Project명을 지정해주면 된다.
 
 ```bash
-export GOOGLE_APPLICATION_CREDENTIALS="c:/zipkin-proxy-dc1792cd9893.json"
 export PROJECT_ID="zipkin-proxy"
 ```
 
@@ -334,8 +333,7 @@ export PROJECT_ID="zipkin-proxy"
 ```
 
 - Create the exporters in code
-- Run the code: `python main.py`
-- Running on http://127.0.0.1:5000/
+- Run the code: `python main_test.py` (Running on http://127.0.0.1:5000/)
 - Viewing your traces: `https://console.cloud.google.com/traces/traces`
 
 [main.py]
