@@ -430,7 +430,7 @@ def test_redirect():
 
 ---
 
-# SKopen API 이용
+# SK Open API 이용 (Tmap API_무료)
 
 - `https://openapi.sk.com/` 에 가입 후 Project 생성하여, API(무료) 구매
 
