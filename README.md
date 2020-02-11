@@ -524,6 +524,9 @@ def test_redirect():
 
 ![marker_cluster](images/marker_cluster.png)
 
+- Geo Coding 및 명칭(POI)통합 검색을 사용하는 example (`geocoding.html`)
+
+![marker_cluster](images/marker_cluster.png)
 
 ## Category
 
