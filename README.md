@@ -526,7 +526,7 @@ def test_redirect():
 
 - Geo Coding 및 명칭(POI)통합 검색을 사용하는 example (`geocoding.html`)
 
-![geocoding](images/geocoding.png)
+![geocoding](images/geocoding.jpg)
 
 ## Category
 
